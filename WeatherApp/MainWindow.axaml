@@ -3,11 +3,12 @@
         x:Class="WeatherApp.MainWindow"
         Title="Application Météo"
         Width="400" Height="500">
+        
     <TabControl>
         <!-- Onglet Recherche -->
         <TabItem Header="Recherche">
             <StackPanel Margin="10">
-                <TextBox x:Name="CityInput" Width="300" PlaceholderText="Entrez une ville..." />
+                <TextBox x:Name="CityInput" Width="300" Watermark="Entrez une ville..." />
                 <Button Content="Rechercher" Width="150" Margin="0,10,0,0" Click="OnSearchClicked" />
                 <TextBlock x:Name="WeatherResult" TextWrapping="Wrap" Margin="0,20,0,0" />
             </StackPanel>
@@ -16,7 +17,7 @@
         <!-- Onglet Prévisions -->
         <TabItem Header="Prévisions">
             <StackPanel Margin="10">
-                <TextBox x:Name="ForecastCityInput" Width="300" PlaceholderText="Entrez une ville..." />
+                <TextBox x:Name="ForecastCityInput" Width="300" Watermark="Entrez une ville..." />
                 <Button Content="Voir Prévisions" Width="150" Margin="0,10,0,0" Click="OnForecastClicked" />
                 <StackPanel x:Name="ForecastResults" Margin="0,20,0,0" />
             </StackPanel>
@@ -25,7 +26,7 @@
         <!-- Onglet Paramètres -->
         <TabItem Header="Paramètres">
             <StackPanel Margin="10">
-                <TextBox x:Name="DefaultCityInput" Width="300" PlaceholderText="Ville par défaut" />
+                <TextBox x:Name="DefaultCityInput" Width="300" Watermark="Ville par défaut" />
                 <Button Content="Enregistrer" Width="150" Margin="0,10,0,0" Click="OnSaveSettingsClicked" />
             </StackPanel>
         </TabItem>
