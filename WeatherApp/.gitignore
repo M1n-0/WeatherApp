@@ -1,4 +1,6 @@
 config.json
 options.json
 bin/
-WeatherApp/obj/
+obj/
+../bin/
+../obj/
