@@ -32,6 +32,17 @@ Do it another time to go inside the project folder:
 cd WeatherApp
 ```
 
+Before launching the application, you must provide a valid API key in a `config.json` file.
+
+Here is an example of a `config.json` file:
+
+```json
+    {
+    "ApiKey": "YourApiKey"
+    }
+```
+(put the file in the WeatherApp folder)
+
 And finally, you can run the project with the following command:
 
 ```bash
