@@ -1,34 +1,62 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
         x:Class="WeatherApp.MainWindow"
-        Title="Application Météo"
-        Width="400" Height="500">
-        
-    <TabControl>
-        <!-- Onglet Recherche -->
-        <TabItem Header="Recherche">
-            <StackPanel Margin="10">
-                <TextBox x:Name="CityInput" Width="300" Watermark="Entrez une ville..." />
-                <Button Content="Rechercher" Width="150" Margin="0,10,0,0" Click="OnSearchClicked" />
-                <TextBlock x:Name="WeatherResult" TextWrapping="Wrap" Margin="0,20,0,0" />
-            </StackPanel>
-        </TabItem>
+        Width="800" Height="600" Background="LightBlue"
+        MinWidth="400" MinHeight="300">
+  
+  <!-- Conteneur principal Grid -->
+  <Grid Margin="20">
+    
+    <!-- Définir les colonnes de la grille -->
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="Auto" />
+    </Grid.ColumnDefinitions>
+    
+    <!-- Définir les lignes de la grille -->
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
 
-        <!-- Onglet Prévisions -->
-        <TabItem Header="Prévisions">
-            <StackPanel Margin="10">
-                <TextBox x:Name="ForecastCityInput" Width="300" Watermark="Entrez une ville..." />
-                <Button Content="Voir Prévisions" Width="150" Margin="0,10,0,0" Click="OnForecastClicked" />
-                <StackPanel x:Name="ForecastResults" Margin="0,20,0,0" />
-            </StackPanel>
-        </TabItem>
+    <TextBlock Text="Application Météo" FontSize="24" FontWeight="Bold" 
+               HorizontalAlignment="Center" Margin="0,10" Grid.Row="0" Grid.ColumnSpan="2"/>
 
-        <!-- Onglet Paramètres -->
-        <TabItem Header="Paramètres">
-            <StackPanel Margin="10">
-                <TextBox x:Name="DefaultCityInput" Width="300" Watermark="Ville par défaut" />
-                <Button Content="Enregistrer" Width="150" Margin="0,10,0,0" Click="OnSaveSettingsClicked" />
-            </StackPanel>
-        </TabItem>
+    <TabControl HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,10">
+      <TabItem Header="🔍 Recherche">
+        <StackPanel Margin="10">
+          <TextBox x:Name="CityInput" Width="0" MinWidth="200" HorizontalAlignment="Stretch" 
+                   Watermark="Entrez une ville" Margin="0,0,10,0"/>
+          <Button Content="Rechercher" Width="100" HorizontalAlignment="Center" Click="OnSearchClicked"/>
+        </StackPanel>
+      </TabItem>
+
+      <TabItem Header="📅 Prévisions">
+        <StackPanel Margin="10">
+          <TextBox x:Name="ForecastCityInput" Width="0" MinWidth="200" HorizontalAlignment="Stretch" 
+                   Watermark="Ville pour prévisions" Margin="0,0,10,0"/>
+          <Button Content="Prévisions" Width="100" HorizontalAlignment="Center" Click="OnForecastClicked"/>
+        </StackPanel>
+      </TabItem>
+
+      <TabItem Header="⚙️ Paramètres">
+        <StackPanel Margin="10">
+          <TextBox x:Name="DefaultCityInput" MinWidth="200" Width="0" HorizontalAlignment="Stretch" 
+                   Watermark="Ville par défaut" Margin="0,0,10,0"/>
+          <Button Content="Sauvegarder" Width="100" HorizontalAlignment="Center" Click="OnSaveSettingsClicked"/>
+        </StackPanel>
+      </TabItem>
     </TabControl>
+
+    <TextBlock x:Name="WeatherResult" Text="" Margin="0,10" TextWrapping="Wrap" Grid.Row="2" Grid.ColumnSpan="2"/>
+
+    <StackPanel x:Name="ForecastResults" Margin="0,10" Grid.Row="3" Grid.ColumnSpan="2"/>
+
+  </Grid>
 </Window>

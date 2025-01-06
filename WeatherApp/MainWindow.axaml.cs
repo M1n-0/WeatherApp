@@ -15,11 +15,9 @@ namespace WeatherApp
         {
             InitializeComponent();
         }
-
-        // Charger la clé API
         public class Config
         {
-            public string ApiKey { get; set; }
+            public string? ApiKey { get; set; }
         }
 
         public static Config LoadConfig()
@@ -28,18 +26,22 @@ namespace WeatherApp
             if (File.Exists(configPath))
             {
                 string json = File.ReadAllText(configPath);
-                return JsonConvert.DeserializeObject<Config>(json);
+                var config = JsonConvert.DeserializeObject<Config>(json);
+                if (config == null || string.IsNullOrEmpty(config.ApiKey))
+                    throw new Exception("Clé API introuvable ou invalide !");
+                return config;
             }
             else
             {
                 throw new FileNotFoundException("Le fichier config.json est introuvable !");
             }
         }
-
-        // Appel à l'API météo actuelle
         public async Task<JObject> GetCurrentWeatherAsync(string cityName)
         {
-            string apiKey = LoadConfig().ApiKey;
+            if (string.IsNullOrWhiteSpace(cityName))
+                throw new ArgumentException("Le nom de la ville ne peut pas être vide.");
+
+            string apiKey = LoadConfig().ApiKey ?? throw new Exception("Clé API manquante.");
             string url = $"https://api.openweathermap.org/data/2.5/weather?q={cityName}&appid={apiKey}&units=metric&lang=fr";
 
             using (HttpClient client = new HttpClient())
@@ -56,11 +58,12 @@ namespace WeatherApp
                 }
             }
         }
-
-        // Appel à l'API des prévisions météo
         public async Task<JObject> GetWeatherForecastAsync(string cityName)
         {
-            string apiKey = LoadConfig().ApiKey;
+            if (string.IsNullOrWhiteSpace(cityName))
+                throw new ArgumentException("Le nom de la ville ne peut pas être vide.");
+
+            string apiKey = LoadConfig().ApiKey ?? throw new Exception("Clé API manquante.");
             string url = $"https://api.openweathermap.org/data/2.5/forecast?q={cityName}&appid={apiKey}&units=metric&lang=fr";
 
             using (HttpClient client = new HttpClient())
@@ -77,22 +80,18 @@ namespace WeatherApp
                 }
             }
         }
-
-        // Recherche météo
         private async void OnSearchClicked(object sender, RoutedEventArgs e)
         {
             try
             {
-                string cityName = CityInput.Text;
+                string cityName = CityInput.Text ?? string.Empty;
                 JObject weatherData = await GetCurrentWeatherAsync(cityName);
 
-                // Extraire les données
-                string city = weatherData["name"].ToString();
-                string description = weatherData["weather"][0]["description"].ToString();
-                string temperature = weatherData["main"]["temp"].ToString();
-                string humidity = weatherData["main"]["humidity"].ToString();
+                string city = weatherData["name"]?.ToString() ?? "Ville inconnue";
+                string description = weatherData["weather"]?[0]?["description"]?.ToString() ?? "Non disponible";
+                string temperature = weatherData["main"]?["temp"]?.ToString() ?? "N/A";
+                string humidity = weatherData["main"]?["humidity"]?.ToString() ?? "N/A";
 
-                // Afficher les résultats
                 WeatherResult.Text = $"Ville : {city}\n" +
                                      $"Description : {description}\n" +
                                      $"Température : {temperature}°C\n" +
@@ -104,20 +103,19 @@ namespace WeatherApp
             }
         }
 
-        // Prévisions météo
         private async void OnForecastClicked(object sender, RoutedEventArgs e)
         {
             try
             {
-                string cityName = ForecastCityInput.Text;
+                string cityName = ForecastCityInput.Text ?? string.Empty;
                 JObject forecastData = await GetWeatherForecastAsync(cityName);
 
                 ForecastResults.Children.Clear();
                 foreach (var item in forecastData["list"])
                 {
-                    string date = item["dt_txt"].ToString();
-                    string description = item["weather"][0]["description"].ToString();
-                    string temperature = item["main"]["temp"].ToString();
+                    string date = item["dt_txt"]?.ToString() ?? "N/A";
+                    string description = item["weather"]?[0]?["description"]?.ToString() ?? "Non disponible";
+                    string temperature = item["main"]?["temp"]?.ToString() ?? "N/A";
 
                     ForecastResults.Children.Add(new TextBlock
                     {
@@ -136,10 +134,9 @@ namespace WeatherApp
             }
         }
 
-        // Sauvegarder les paramètres
         private void OnSaveSettingsClicked(object sender, RoutedEventArgs e)
         {
-            string defaultCity = DefaultCityInput.Text;
+            string defaultCity = DefaultCityInput.Text ?? string.Empty;
             var options = new { DefaultCity = defaultCity };
             File.WriteAllText("options.json", JsonConvert.SerializeObject(options));
         }

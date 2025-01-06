@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Labat\\Desktop\\perso\\WeatherApp\\WeatherApp\\WeatherApp.csproj": {}
+    "C:\\Users\\Quentin Chaillou\\WeatherApp\\WeatherApp\\WeatherApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Labat\\Desktop\\perso\\WeatherApp\\WeatherApp\\WeatherApp.csproj": {
+    "C:\\Users\\Quentin Chaillou\\WeatherApp\\WeatherApp\\WeatherApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Labat\\Desktop\\perso\\WeatherApp\\WeatherApp\\WeatherApp.csproj",
+        "projectUniqueName": "C:\\Users\\Quentin Chaillou\\WeatherApp\\WeatherApp\\WeatherApp.csproj",
         "projectName": "WeatherApp",
-        "projectPath": "C:\\Users\\Labat\\Desktop\\perso\\WeatherApp\\WeatherApp\\WeatherApp.csproj",
-        "packagesPath": "C:\\Users\\Labat\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Labat\\Desktop\\perso\\WeatherApp\\WeatherApp\\obj\\",
+        "projectPath": "C:\\Users\\Quentin Chaillou\\WeatherApp\\WeatherApp\\WeatherApp.csproj",
+        "packagesPath": "C:\\Users\\Quentin Chaillou\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Quentin Chaillou\\WeatherApp\\WeatherApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Labat\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Quentin Chaillou\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
