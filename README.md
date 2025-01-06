@@ -43,6 +43,8 @@ Here is an example of a `config.json` file:
 ```
 (put the file in the WeatherApp folder)
 
+For the API Key you need to create an account on the OpenWeatherMap website and get an API key. You can get it from the following link: https://home.openweathermap.org/users/sign_up
+
 And finally, you can run the project with the following command:
 
 ```bash
